@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">MagicWeather</string>
+    <string name="action_settings">Settings</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="weather_source_yahoo">Yahoo! Weather</string>
+
+    <!-- Weather - Wind directions -->
+    <string name="weather_N">N</string>
+    <string name="weather_NE">NE</string>
+    <string name="weather_E">E</string>
+    <string name="weather_SE">SE</string>
+    <string name="weather_S">S</string>
+    <string name="weather_SW">SW</string>
+    <string name="weather_W">W</string>
+    <string name="weather_NW">NW</string>
+</resources>
