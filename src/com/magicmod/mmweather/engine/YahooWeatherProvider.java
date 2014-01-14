@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2013 The CyanogenMod Project
  * Copyright (C) 2014 The MagicMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -46,6 +47,11 @@ import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
 
 /**
+ * 雅虎天气源
+ * 
+ * 修改自CyanogenMod的雅虎天气实现方式
+ * 
+ * 
  * @author SunRain
  * 
  * 2014年1月12日
@@ -78,6 +84,8 @@ public class YahooWeatherProvider implements WeatherProvider {
     private boolean mMetricUnits = false;
     
     private WeatherDataChangedListener mWeatherDataChangedListener;
+    
+    private YahooWeatherResProvider mYahooWeatherResProvider;
     
     public YahooWeatherProvider(Context context) {
         mContext = context;
@@ -310,6 +318,7 @@ public class YahooWeatherProvider implements WeatherProvider {
                 }
                 ArrayList<DayForecast> forecasts = new ArrayList<WeatherInfo.DayForecast>();
 
+                long time = System.currentTimeMillis();
                 for (DayForecast forecast : handler.forecasts) {
                     if (forecast.getDate().equals(handler.date)) {
                         forecast.setCondition(handler.condition);
@@ -318,13 +327,15 @@ public class YahooWeatherProvider implements WeatherProvider {
                         forecast.setSunRaise(handler.sunrise);
                         forecast.setSunSet(handler.sunset);
                         forecast.setTemperature(handler.temperature);
-                        forecast.setTempUnit(handler.speedUnit);
+                        forecast.setTempUnit(handler.temperatureUnit);
                         forecast.setWindSpeed(handler.windSpeed);
                         forecast.setWindDirection(handler.windDirection);
+                        forecast.setWindSpeedUnit(handler.speedUnit);
                     }
                     if (localizedCityName != null) {
                         forecast.setCity(localizedCityName);
                     }
+                    forecast.setSynctimestamp(String.valueOf(time));
                     forecasts.add(forecast);
                 }
                 mWeatherInfo = new WeatherInfo(forecasts);
@@ -391,5 +402,14 @@ public class YahooWeatherProvider implements WeatherProvider {
     @Override
     public void setDataChangedListener(WeatherDataChangedListener listener) {
         mWeatherDataChangedListener = listener; 
+    }
+
+    @Override
+    public WeatherResProvider getWeatherResProvider() {
+        // TODO Auto-generated method stub
+        if (mYahooWeatherResProvider == null) {
+            mYahooWeatherResProvider = new YahooWeatherResProvider();
+        }
+        return mYahooWeatherResProvider;
     }
 }

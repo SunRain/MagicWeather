@@ -1,4 +1,5 @@
 /*
+ * Copyright (C) 2013 The CyanogenMod Project
  * Copyright (C) 2014 The MagicMod Project
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
@@ -22,6 +23,8 @@ import android.location.Location;
 import java.util.List;
 
 /**
+ * 抽象类,继承此类以实现某一个具体的天气源,从而在WeatherEngine.java里面进行操作
+ * 
  * @author SunRain
  * 
  * 2014年1月12日
@@ -36,7 +39,14 @@ public interface WeatherProvider {
         public String country;
     }
 
+    /**
+     * 2014年1月13日
+     * @param input city,State/Country
+     * @return
+     */
     List<LocationResult> getLocations(String input);
+    
+    WeatherResProvider getWeatherResProvider();
 
     /**
      * 2014年1月12日

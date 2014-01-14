@@ -22,6 +22,11 @@ import android.graphics.Bitmap;
 import com.magicmod.mmweather.engine.WeatherInfo.DayForecast;
 
 /**
+ * 抽象类,继承此类以便得到一个修改过的DayForecast数据集
+ * 
+ * 此类用以在不同天气源得到不同的天气数据以后进行修正,以便最终暴露给用户的数据统一
+ * 
+ * 
  * @author SunRain
  * 
  * 2014年1月12日

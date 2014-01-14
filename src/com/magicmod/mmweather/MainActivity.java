@@ -8,7 +8,9 @@ import android.util.Log;
 import android.view.Menu;
 
 import com.magicmod.mmweather.engine.WeatherDataChangedListener;
+import com.magicmod.mmweather.engine.WeatherEngine;
 import com.magicmod.mmweather.engine.WeatherInfo;
+import com.magicmod.mmweather.engine.WeatherProvider;
 import com.magicmod.mmweather.engine.YahooWeatherProvider;
 
 public class MainActivity extends Activity {
@@ -40,7 +42,7 @@ public class MainActivity extends Activity {
         protected WeatherInfo doInBackground(Void... params) {
             // TODO Auto-generated method stub
 
-            YahooWeatherProvider yahooWeatherProvider = new YahooWeatherProvider(getApplicationContext());
+            /*YahooWeatherProvider yahooWeatherProvider = new YahooWeatherProvider(getApplicationContext());
             yahooWeatherProvider.setDataChangedListener(new WeatherDataChangedListener() {
 
                 @Override
@@ -51,8 +53,21 @@ public class MainActivity extends Activity {
                 }
             });
             
-            yahooWeatherProvider.getWeatherInfo("56579778", null, true);//.toString();
+            yahooWeatherProvider.getWeatherInfo("56579778", null, true);//.toString();*/
+            
+            WeatherEngine mWeatherEngine = WeatherEngine.getinstance(getApplicationContext());
+            WeatherProvider mWeatherProvider = mWeatherEngine.getWeatherProvider();
+            
+            mWeatherEngine.setToCache(mWeatherProvider.getWeatherInfo("56579778", null, true));
+            
+            
+           // String s = mWeatherEngine.encodeWeatherInfo(mWeatherProvider.getWeatherInfo("56579778", null, true));
+            //mWeatherEngine.decodeWeatherInfo(mWeatherEngine.encodeWeatherInfo(mWeatherProvider.getWeatherInfo("56579778", null, true))).toString();
 
+            //WeatherInfo weatherInfo = mWeatherEngine.decodeWeatherInfo(s);
+            
+            //Log.d(TAG, weatherInfo.toString());
+            
             return null;
         }
     }
